@@ -9,6 +9,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security.Notifications;
 using System.Text;
+using System.Security.Claims;
+using System.Collections.Generic;
 
 namespace OpenIdConnect_Test1
 {
@@ -42,8 +44,7 @@ namespace OpenIdConnect_Test1
                     //SecurityTokenReceived = OnSecurityTokenReceived,
                     AuthorizationCodeReceived = async n =>
                     {
-                        System.Console.WriteLine(n.Code);
-                                  
+                        System.Console.WriteLine(n.JwtSecurityToken.RawData);                                                                                                                                  
                     }
                     //SecurityTokenValidated = OnSecurityTokenValidated,
                     //MessageReceived = OnMessageReceived
@@ -56,17 +57,6 @@ namespace OpenIdConnect_Test1
         {
             System.Console.WriteLine(arg);
             return Task.FromResult(0);
-        }
-
-        private async Task<int> OnSecurityTokenValidated(SecurityTokenValidatedNotification<OpenIdConnectMessage, OpenIdConnectAuthenticationOptions> arg)
-        {
-            var toast = await ToastBreadAsync(2);
-            return 0;
-        }
-
-        async Task<int> ToastBreadAsync(int i)
-        {
-            return 0;
-        }
+        }        
     }
 }
